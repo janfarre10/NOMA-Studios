@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f6f2"><meta name="description" content="Organiza tu menú semanal y la lista de la compra sin complicarte.">
+  <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icons/icon-192.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css"><title>NOMA — Tu semana, más fácil</title>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#" aria-label="NOMA inicio"><span class="brandmark">N<span>.</span></span><span class="noma-wordmark">NOMA</span></a>
+  <button id="installBtn" class="install-btn hidden" type="button">Instalar app</button>
+</header>
+<main class="shell">
+  <section class="profile-card card">
+    <div><div class="eyebrow">TU ESPACIO NOMA</div><h2 id="welcomeTitle">Hola, bienvenida/o.</h2><p class="section-subtitle">Tu planificación, guardada en este dispositivo.</p></div>
+    <label class="name-field">¿Cómo te llamas?<input id="customerName" type="text" maxlength="35" placeholder="Escribe tu nombre" autocomplete="given-name"></label>
+  </section>
+  <nav class="noma-nav" aria-label="Apartados NOMA">
+    <button class="nav-tab active" data-view="week">Mi semana</button><button class="nav-tab" data-view="shopping">Mi compra</button><button class="nav-tab" data-view="list">Mi lista</button><button class="nav-tab" data-view="budget">Presupuesto</button>
+  </nav>
+  <section class="hero">
+    <div class="eyebrow"><span class="eyebrow-dot"></span> TU SEMANA, MÁS FÁCIL</div>
+    <h1>Come bien.<br><em>Sin darle mil vueltas.</em></h1>
+    <p class="hero-copy">Un plan sencillo para saber qué cocinar y qué comprar. A tu ritmo, con tu presupuesto.</p>
+    <div class="hero-meta"><span><span class="meta-icon">✳</span> Plan semanal</span><span><span class="meta-icon">↗</span> Lista automática</span><span><span class="meta-icon">♡</span> A tu manera</span></div>
+  </section>
+  <section class="setup card view-section" data-section="week">
+    <div class="section-heading"><div><div class="eyebrow">01 / PERSONALIZA</div><h2>Tu semana, tus reglas</h2></div><span class="step-pill">2 min</span></div>
+    <div class="form-grid">
+      <label>¿Para cuántas personas?<select id="people"><option value="1">1 persona</option><option value="2" selected>2 personas</option><option value="3">3 personas</option><option value="4">4 personas</option><option value="5">5 personas</option><option value="6">6 personas</option></select></label>
+      <label>Presupuesto semanal<select id="budget"><option value="35">Hasta 35 €</option><option value="50" selected>Hasta 50 €</option><option value="70">Hasta 70 €</option><option value="90">Hasta 90 €</option><option value="120">Hasta 120 €</option></select></label>
+      <label>Tiempo para cocinar<select id="time"><option value="15">15 min o menos</option><option value="30" selected>Hasta 30 min</option><option value="45">Hasta 45 min</option></select></label>
+      <label>Cómo prefieres comer<select id="diet"><option value="all" selected>De todo un poco</option><option value="vegetarian">Vegetariano</option><option value="protein">Alto en proteína</option><option value="fish">Más pescado</option></select></label>
+    </div>
+    <div class="setup-footer"><p>Sin dietas estrictas. Solo ideas prácticas para tu día a día.</p><button id="generateBtn" class="primary-btn">Crear mi menú <span>↗</span></button></div>
+  </section>
+  <section class="plan-section view-section" data-section="week">
+    <div class="section-heading plan-heading"><div><div class="eyebrow">02 / TU PLAN</div><h2>Esta semana, resuelta.</h2></div><button id="refreshBtn" class="text-btn" type="button">↻ Cambiar menú</button></div>
+    <div id="planSummary" class="summary-strip"><div><span class="summary-number" id="recipeCount">21</span><span>ideas de comida</span></div><div><span class="summary-number" id="budgetEstimate">≈ 43 €</span><span>coste orientativo</span></div><div><span class="summary-number" id="cookEstimate">30 min</span><span>tiempo medio</span></div></div>
+    <div id="weekGrid" class="week-grid" aria-live="polite"></div>
+  </section>
+  <section class="shopping card view-section" data-section="shopping list">
+    <div class="section-heading"><div><div class="eyebrow">03 / TODO LISTO</div><h2>Tu lista de la compra</h2><p class="section-subtitle">Agrupada para que compres sin dar vueltas.</p></div><span class="shopping-count" id="shoppingCount">0 artículos</span></div>
+    <div class="shopping-toolbar"><div class="progress-wrap"><div class="progress-track"><div id="progressFill" class="progress-fill"></div></div><span id="progressText">0 de 0</span></div><div class="toolbar-actions"><button id="copyBtn" class="secondary-btn">Copiar lista</button><button id="resetChecks" class="quiet-btn">Reiniciar</button></div></div>
+    <div id="shoppingList" class="shopping-list"></div>
+    <div id="shoppingEmpty" class="empty-state hidden">Tu lista aparecerá aquí cuando generes el menú.</div>
+  </section>
+  <section class="budget-panel card view-section" data-section="budget"><div class="eyebrow">04 / TU PRESUPUESTO</div><h2>Controla tu gasto semanal.</h2><div class="budget-total"><span>Estimación orientativa</span><strong id="budgetPanelEstimate">≈ 43 €</strong></div><p class="section-subtitle">El importe es aproximado, no un precio actualizado de supermercado. Puede variar según marcas, tienda, cantidades y temporada.</p><button class="secondary-btn" id="budgetToWeek">Ajustar presupuesto</button></section>
+  <footer><span class="brandmark small">N<span>.</span></span><span>NOMA</span><span class="footer-note">Tu semana, en calma.</span></footer>
+  <p class="disclaimer">Los precios son estimaciones orientativas y pueden variar según tienda, zona y temporada. Las propuestas son ideas generales, no recomendaciones médicas ni dietas personalizadas.</p>
+</main>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<dialog id="recipeDialog" class="recipe-dialog"><button id="closeDialog" class="dialog-close" aria-label="Cerrar">×</button><div id="recipeContent"></div></dialog>
+<script src="app.js"></script>
+</body></html>
